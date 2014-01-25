@@ -1,0 +1,43 @@
+1. Launch -> /Applications/Automator 
+
+2. Select workflow type -> Service (It is a good choice for this) 
+
+3. In the 2 combo-boxes at the top of the window:  (Service receives) Select -> no input (in) -> Select -> Finder 
+
+4. From the left panel Library Drag -> "Run shell script"; to the right panel (if the "Run shell script"box has any content already - i.e. 'cat'- please delete it) 
+
+5.Enter or copy/paste the text between the lines below :  
+
+-------- 
+
+is_shown=$(defaults read com.apple.finder AppleShowAllFiles)
+if [ $is_shown != "TRUE" ]
+then
+defaults write com.apple.finder AppleShowAllFiles TRUE
+else
+defaults write com.apple.finder AppleShowAllFiles FALSE
+fi
+
+------- 
+(You may have to retype the quotes around the "TRUE" in the if statement) 
+
+6. Below that, from the left panel Library Drag -> ""Ask for confirmation" to the right panel. 
+
+7. Enter a message to the effect: 
+(Subject Box): Do you want to relaunch finder? 
+(Detail box): This will cancel any file transfers
+
+8. Under that, from the left panel Library Drag -> "Run shell script" to the right panel. 
+
+9. Enter or copy/paste the text between the lines below :  
+
+-------- 
+
+killall Finder
+
+ -------- 
+
+10. Save it, naming it whatever you want (i.e. "hide-unhide files"), you're done. It will now appear in: Finder Menu-> Services submenu -> (general) "hide-unhide files".
+
+
+11. To launch it, just open a Finder window and go to Finder Menu-> Services submenu -> (general) "hide-unhide files".

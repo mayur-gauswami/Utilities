@@ -1,9 +1,0 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1265
-{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;\red48\green53\blue57;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww24680\viewh12940\viewkind0
-\deftab720
-\pard\pardeftab720\sl420\sa300
-
-\f0\fs30 \cf2 1. Launch -> /Applications/Automator\uc0\u8232 2. Select workflow type -> Service (It is a good choice for this)\u8232 3. In the 2 combo-boxes at the top of the window: \u8232 (Service receives) Select -> no input\u8232 (in) -> Select -> Finder\u8232 4. From the left panel Library Drag -> "Run shell script"; to the right panel\u8232 (if the "Run shell script"box has any content already - i.e. 'cat'- please delete it)\u8232 5.Enter or copy/paste the text between the lines below : \u8232 --------\u8232 is_shown=$(defaults read com.apple.finder AppleShowAllFiles)\u8232 if [ $is_shown != "TRUE" ]\u8232 then\u8232 defaults write com.apple.finder AppleShowAllFiles TRUE\u8232 else\u8232 defaults write com.apple.finder AppleShowAllFiles FALSE\u8232 fi\u8232 -------\u8232 (You may have to retype the quotes around the "TRUE" in the if statement)\u8232 6. Below that, from the left panel Library Drag -> "Ask for confirmation" to the right panel.\u8232 7. Enter a message to the effect:\u8232 (Subject Box): "Do you want to relaunch finder?\u8232 (Detail box): "This will cancel any file transfers"\u8232 8. Under that, from the left panel Library Drag -> "Run shell script" to the right panel.\u8232 9. Enter or copy/paste the text between the lines below : \u8232 --------\u8232 killall Finder\u8232 --------\u8232 10. Save it, naming it whatever you want (i.e. "hide-unhide files"), you're done. It will now appear in: Finder Menu-> Services submenu -> (general) "hide-unhide files".\
-11. To launch it, just open a Finder window and go to Finder Menu-> Services submenu -> (general) "hide-unhide files".}
